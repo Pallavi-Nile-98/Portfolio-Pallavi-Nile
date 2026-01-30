@@ -619,8 +619,7 @@ section {
     border: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
-    height: 100%;
-    min-height: 650px;
+    height: 700px;
     align-items: stretch;
 }
 
@@ -765,6 +764,7 @@ section {
     justify-content: center;
     margin-bottom: 1.5rem;
     flex-shrink: 0;
+    flex-grow: 0;
 }
 
 .project-icon i {
@@ -776,9 +776,11 @@ section {
     font-size: 1.3rem;
     margin-bottom: 0.5rem;
     color: var(--text-primary);
-    min-height: 3rem;
+    height: 3.5rem;
     display: flex;
     align-items: center;
+    flex-shrink: 0;
+    flex-grow: 0;
 }
 
 .project-tech {
@@ -786,23 +788,29 @@ section {
     font-weight: 500;
     font-size: 0.9rem;
     margin-bottom: 1rem;
-    min-height: 1.5rem;
+    height: 1.5rem;
     flex-shrink: 0;
+    flex-grow: 0;
 }
 
 .project-description {
     color: var(--text-secondary);
     margin-bottom: 1.5rem;
     line-height: 1.7;
-    min-height: 4.5rem;
+    height: 4.5rem;
     flex-shrink: 0;
+    flex-grow: 0;
+    overflow: hidden;
 }
 
 .project-features {
     list-style: none;
     padding-left: 0;
     flex-grow: 1;
+    flex-shrink: 1;
     margin-bottom: 1rem;
+    overflow-y: auto;
+    min-height: 0;
 }
 
 .project-features li {
@@ -1206,6 +1214,8 @@ section {
     padding-top: 1rem;
     border-top: 1px solid var(--border-color);
     flex-shrink: 0;
+    flex-grow: 0;
+    min-height: 60px;
 }
 
 .skill-badge {
