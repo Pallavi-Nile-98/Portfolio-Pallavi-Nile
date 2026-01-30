@@ -85,13 +85,28 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe elements for animation
-const animateElements = document.querySelectorAll('.timeline-item, .project-card, .skill-category, .contact-item');
-animateElements.forEach(el => {
+// Observe elements for animation with stagger effect
+const animateElements = document.querySelectorAll('.timeline-item, .project-card, .skill-category, .contact-item, .cert-card');
+animateElements.forEach((el, index) => {
     el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = `opacity 0.8s ease ${index * 0.1}s, transform 0.8s ease ${index * 0.1}s`;
     observer.observe(el);
+});
+
+// Add parallax effect on scroll
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const heroImage = document.querySelector('.hero-image');
+    if (heroImage && scrolled < window.innerHeight) {
+        heroImage.style.transform = `translateY(${scrolled * 0.2}px)`;
+    }
+});
+
+// Add smooth reveal animation for all sections
+const allSections = document.querySelectorAll('section');
+allSections.forEach(section => {
+    observer.observe(section);
 });
 
 // Add active class to nav links on click
