@@ -115,21 +115,11 @@ body {
 }
 
 .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--primary-color);
+    display: none;
 }
 
 .nav-link:hover {
-    color: var(--primary-color);
-}
-
-.nav-link:hover::after {
-    width: 100%;
+    color: var(--text-primary);
 }
 
 .btn-download-cv {
