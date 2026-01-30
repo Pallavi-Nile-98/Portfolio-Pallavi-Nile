@@ -590,6 +590,7 @@ section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2rem;
+    align-items: stretch;
 }
 
 .project-card {
@@ -599,6 +600,9 @@ section {
     box-shadow: var(--shadow-md);
     transition: all 0.3s ease;
     border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .project-card:hover {
@@ -646,6 +650,8 @@ section {
 .project-features {
     list-style: none;
     padding-left: 0;
+    flex-grow: 1;
+    margin-bottom: 1rem;
 }
 
 .project-features li {
@@ -1045,12 +1051,8 @@ section {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-top: 1rem;
+    margin-top: auto;
     padding-top: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.project-skills {
     border-top: 1px solid var(--border-color);
 }
 
