@@ -94,15 +94,6 @@ animateElements.forEach((el, index) => {
     observer.observe(el);
 });
 
-// Add parallax effect on scroll
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const heroImage = document.querySelector('.hero-image');
-    if (heroImage && scrolled < window.innerHeight) {
-        heroImage.style.transform = `translateY(${scrolled * 0.2}px)`;
-    }
-});
-
 // Add smooth reveal animation for all sections
 const allSections = document.querySelectorAll('section');
 allSections.forEach(section => {
