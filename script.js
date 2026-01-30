@@ -303,6 +303,123 @@ chatbotInput.addEventListener('keypress', (e) => {
     }
 });
 
+// Projects Carousel Functionality
+const projectsGrid = document.getElementById('projectsGrid');
+const prevBtn = document.getElementById('prevProject');
+const nextBtn = document.getElementById('nextProject');
+const indicatorsContainer = document.getElementById('carouselIndicators');
+const projectCards = document.querySelectorAll('.project-card');
+let currentIndex = 0;
+
+function getCardsPerView() {
+    return window.innerWidth > 968 ? 3 : window.innerWidth > 768 ? 2 : 1;
+}
+
+// Create indicators
+projectCards.forEach((_, index) => {
+    const indicator = document.createElement('button');
+    indicator.className = 'carousel-indicator';
+    if (index === 0) indicator.classList.add('active');
+    indicator.addEventListener('click', () => goToProject(index));
+    indicatorsContainer.appendChild(indicator);
+});
+
+const indicators = document.querySelectorAll('.carousel-indicator');
+
+function updateCarousel() {
+    const cardsPerView = getCardsPerView();
+    const cardWidth = projectCards[0] ? projectCards[0].offsetWidth + 32 : 0; // card width + gap
+    const scrollAmount = currentIndex * cardWidth * cardsPerView;
+    
+    if (projectsGrid) {
+        projectsGrid.scrollTo({
+            left: scrollAmount,
+            behavior: 'smooth'
+        });
+    }
+    
+    // Update indicators
+    if (indicators.length > 0) {
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === currentIndex);
+        });
+    }
+    
+    // Update button visibility
+    if (prevBtn) {
+        prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
+        prevBtn.style.pointerEvents = currentIndex === 0 ? 'none' : 'auto';
+    }
+    
+    if (nextBtn) {
+        const maxIndex = Math.max(0, projectCards.length - cardsPerView);
+        nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
+        nextBtn.style.pointerEvents = currentIndex >= maxIndex ? 'none' : 'auto';
+    }
+}
+
+function goToProject(index) {
+    const maxIndex = Math.max(0, projectCards.length - cardsPerView);
+    currentIndex = Math.max(0, Math.min(index, maxIndex));
+    updateCarousel();
+}
+
+function nextProject() {
+    const cardsPerView = getCardsPerView();
+    const maxIndex = Math.max(0, projectCards.length - cardsPerView);
+    if (currentIndex < maxIndex) {
+        currentIndex++;
+        updateCarousel();
+    }
+}
+
+function prevProject() {
+    if (currentIndex > 0) {
+        currentIndex--;
+        updateCarousel();
+    }
+}
+
+if (prevBtn && nextBtn) {
+    prevBtn.addEventListener('click', prevProject);
+    nextBtn.addEventListener('click', nextProject);
+}
+
+// Handle window resize
+let resizeTimer;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        currentIndex = 0;
+        updateCarousel();
+    }, 250);
+});
+
+// Scroll to Top Button
+const scrollToTopBtn = document.getElementById('scrollToTop');
+
+if (scrollToTopBtn) {
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            scrollToTopBtn.classList.add('show');
+        } else {
+            scrollToTopBtn.classList.remove('show');
+        }
+    });
+
+    scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+// Initialize carousel
+if (projectsGrid && projectCards.length > 0) {
+    updateCarousel();
+}
+
 // Console message
 console.log('%c👋 Hello! Thanks for checking out my portfolio.', 'color: #FF6B35; font-size: 16px; font-weight: bold;');
 console.log('%cFeel free to reach out if you\'d like to collaborate!', 'color: #6b7280; font-size: 14px;');
