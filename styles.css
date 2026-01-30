@@ -42,20 +42,20 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--gradient-primary);
+    background: #9ca3af;
     border-radius: 10px;
     border: 2px solid var(--bg-secondary);
     transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-dark);
+    background: #6b7280;
 }
 
 /* Firefox Scrollbar */
 * {
     scrollbar-width: thin;
-    scrollbar-color: var(--primary-color) var(--bg-secondary);
+    scrollbar-color: #9ca3af var(--bg-secondary);
 }
 
 body {
@@ -1359,9 +1359,9 @@ section {
     }
 }
 
-/* Floating animation for hero image */
+/* Hero image - no animation */
 .hero-image {
-    animation: float 6s ease-in-out infinite;
+    animation: none;
 }
 
 /* Pulse animation for buttons */
