@@ -31,6 +31,33 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gradient-primary);
+    border-radius: 10px;
+    border: 2px solid var(--bg-secondary);
+    transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* Firefox Scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) var(--bg-secondary);
+}
+
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     color: var(--text-primary);
@@ -1267,6 +1294,228 @@ section {
 
 .chatbot-send:active {
     transform: scale(0.95);
+}
+
+/* Additional Animations */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Floating animation for hero image */
+.hero-image {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Pulse animation for buttons */
+.btn-primary,
+.btn-secondary,
+.btn-chat {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-chat:hover {
+    animation: none;
+}
+
+/* Stagger animation for project cards */
+.projects-grid .project-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.projects-grid .project-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.projects-grid .project-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+/* Stagger animation for skill categories */
+.skills-grid .skill-category:nth-child(odd) {
+    animation: slideInLeft 0.6s ease-out;
+}
+
+.skills-grid .skill-category:nth-child(even) {
+    animation: slideInRight 0.6s ease-out;
+}
+
+/* Hover animations */
+.project-card,
+.skill-category,
+.cert-card,
+.contact-item {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover,
+.skill-category:hover,
+.cert-card:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+.contact-item:hover {
+    transform: translateX(5px);
+}
+
+/* Icon animations */
+.social-links a i,
+.contact-icon i,
+.project-icon i,
+.cert-icon i {
+    transition: transform 0.3s ease;
+}
+
+.social-links a:hover i {
+    transform: rotate(360deg) scale(1.2);
+}
+
+.contact-icon:hover i,
+.project-icon:hover i,
+.cert-icon:hover i {
+    transform: scale(1.2) rotate(5deg);
+}
+
+/* Skill tag hover animation */
+.skill-tag {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-tag::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.skill-tag:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Timeline marker animation */
+.timeline-marker {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.timeline-item:hover .timeline-marker {
+    animation: none;
+    transform: scale(1.3);
+}
+
+/* Section title animation */
+.section-title {
+    position: relative;
+    overflow: hidden;
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.2), transparent);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* Navbar link animation enhancement */
+.nav-link {
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-color);
+    opacity: 0.1;
+    transition: left 0.3s ease;
+}
+
+.nav-link:hover::before {
+    left: 0;
 }
 
 /* Smooth scroll behavior */
