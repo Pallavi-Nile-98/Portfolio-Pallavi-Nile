@@ -601,6 +601,7 @@ section {
     -ms-overflow-style: none;
     scroll-snap-type: x mandatory;
     padding: 0 1rem;
+    width: 100%;
 }
 
 .projects-grid::-webkit-scrollbar {
@@ -609,8 +610,9 @@ section {
 
 .project-card {
     scroll-snap-align: start;
-    flex: 0 0 calc(33.333% - 1.33rem);
+    flex: 0 0 calc((100% - 4rem) / 3);
     min-width: 320px;
+    max-width: calc((100% - 4rem) / 3);
     background: white;
     padding: 2.5rem;
     border-radius: 12px;
@@ -625,13 +627,15 @@ section {
 
 @media (max-width: 968px) {
     .project-card {
-        flex: 0 0 calc(50% - 1rem);
+        flex: 0 0 calc((100% - 2rem) / 2);
+        max-width: calc((100% - 2rem) / 2);
     }
 }
 
 @media (max-width: 768px) {
     .project-card {
         flex: 0 0 100%;
+        max-width: 100%;
     }
 }
 
