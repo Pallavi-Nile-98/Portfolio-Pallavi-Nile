@@ -242,7 +242,11 @@
     <section id="projects" class="projects">
         <div class="container">
             <h2 class="section-title">Featured Projects</h2>
-            <div class="projects-grid">
+            <div class="projects-carousel-wrapper">
+                <button class="carousel-btn carousel-btn-left" id="prevProject" aria-label="Previous project">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="projects-grid" id="projectsGrid">
                 <div class="project-card">
                     <div class="project-icon">
                         <i class="fas fa-hands"></i>
@@ -323,7 +327,11 @@
                         <span class="skill-badge">GitHub Actions</span>
                     </div>
                 </div>
+                <button class="carousel-btn carousel-btn-right" id="nextProject" aria-label="Next project">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
+            <div class="carousel-indicators" id="carouselIndicators"></div>
         </div>
     </section>
 
@@ -519,6 +527,16 @@
             </div>
         </div>
     </section>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <!-- Footer -->
     <footer class="footer">
