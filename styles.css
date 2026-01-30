@@ -6,23 +6,25 @@
 }
 
 :root {
-    --primary-color: #6366f1;
-    --primary-dark: #4f46e5;
-    --secondary-color: #8b5cf6;
-    --accent-color: #ec4899;
-    --text-primary: #1f2937;
-    --text-secondary: #6b7280;
-    --text-light: #9ca3af;
-    --bg-primary: #ffffff;
-    --bg-secondary: #f9fafb;
-    --bg-dark: #111827;
-    --border-color: #e5e7eb;
+    --primary-color: #FF6B35;
+    --primary-dark: #E55A2B;
+    --secondary-color: #FF7849;
+    --accent-color: #FF6B35;
+    --text-primary: #1a1a1a;
+    --text-secondary: #4a4a4a;
+    --text-light: #8a8a8a;
+    --text-white: #ffffff;
+    --bg-primary: #FAF9F6;
+    --bg-secondary: #F5F5F0;
+    --bg-dark: #1a1a1a;
+    --bg-dark-secondary: #2d2d2d;
+    --border-color: #e0e0e0;
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-    --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-    --gradient-secondary: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+    --gradient-primary: linear-gradient(135deg, #FF6B35 0%, #FF7849 100%);
+    --gradient-secondary: linear-gradient(135deg, #FF6B35 0%, #E55A2B 100%);
 }
 
 html {
@@ -69,10 +71,8 @@ body {
 .nav-brand {
     font-size: 1.5rem;
     font-weight: 700;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--bg-dark);
+    letter-spacing: 0.05em;
 }
 
 .nav-menu {
@@ -96,7 +96,7 @@ body {
     left: 0;
     width: 0;
     height: 2px;
-    background: var(--gradient-primary);
+    background: var(--primary-color);
     transition: width 0.3s ease;
 }
 
@@ -106,6 +106,26 @@ body {
 
 .nav-link:hover::after {
     width: 100%;
+}
+
+.btn-download-cv {
+    background: var(--bg-dark) !important;
+    color: white !important;
+    padding: 0.5rem 1.5rem !important;
+    border-radius: 4px !important;
+    font-weight: 600 !important;
+    margin-left: 1rem;
+}
+
+.btn-download-cv::after {
+    display: none !important;
+}
+
+.btn-download-cv:hover {
+    background: var(--text-primary) !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 .hamburger {
@@ -129,7 +149,7 @@ body {
     display: flex;
     align-items: center;
     padding-top: 80px;
-    background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+    background: var(--bg-primary);
     position: relative;
     overflow: hidden;
 }
@@ -141,7 +161,7 @@ body {
     right: -10%;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(255, 107, 53, 0.08) 0%, transparent 70%);
     border-radius: 50%;
     z-index: 0;
 }
@@ -160,33 +180,39 @@ body {
 }
 
 .hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
-    line-height: 1.2;
-    margin-bottom: 1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 4.5rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
 .greeting {
     display: block;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 400;
     color: var(--text-secondary);
     margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 }
 
 .name {
     display: block;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--text-primary);
+    font-weight: 800;
+    font-size: 5rem;
+    opacity: 0.9;
 }
 
 .hero-subtitle {
-    font-size: 1.5rem;
-    color: var(--primary-color);
+    font-size: 1.8rem;
+    color: var(--text-primary);
     font-weight: 600;
     margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .hero-description {
@@ -213,24 +239,27 @@ body {
 }
 
 .btn-primary {
-    background: var(--gradient-primary);
+    background: var(--bg-dark);
     color: white;
     box-shadow: var(--shadow-md);
+    border: 2px solid var(--bg-dark);
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
+    background: var(--text-primary);
 }
 
 .btn-secondary {
     background: transparent;
-    color: var(--primary-color);
-    border-color: var(--primary-color);
+    color: var(--bg-dark);
+    border-color: var(--bg-dark);
+    border-width: 2px;
 }
 
 .btn-secondary:hover {
-    background: var(--primary-color);
+    background: var(--bg-dark);
     color: white;
     transform: translateY(-2px);
 }
@@ -247,14 +276,14 @@ body {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: var(--bg-secondary);
-    color: var(--primary-color);
+    background: var(--bg-dark);
+    color: white;
     text-decoration: none;
     transition: all 0.3s ease;
 }
 
 .social-links a:hover {
-    background: var(--gradient-primary);
+    background: var(--primary-color);
     color: white;
     transform: translateY(-3px);
     box-shadow: var(--shadow-md);
@@ -273,7 +302,7 @@ body {
     border-radius: 50%;
     object-fit: cover;
     box-shadow: var(--shadow-xl);
-    border: 5px solid white;
+    border: 5px solid var(--bg-primary);
     transition: transform 0.3s ease;
 }
 
@@ -301,12 +330,19 @@ section {
 }
 
 .section-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Inter', sans-serif;
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: 3rem;
     color: var(--text-primary);
     position: relative;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.about .section-title,
+.experience .section-title {
+    color: var(--text-white);
 }
 
 .section-title::after {
@@ -317,13 +353,14 @@ section {
     transform: translateX(-50%);
     width: 60px;
     height: 4px;
-    background: var(--gradient-primary);
+    background: var(--primary-color);
     border-radius: 2px;
 }
 
 /* About Section */
 .about {
-    background: var(--bg-primary);
+    background: var(--bg-dark);
+    color: var(--text-white);
 }
 
 .about-content {
@@ -335,13 +372,13 @@ section {
 
 .about-text .lead {
     font-size: 1.2rem;
-    color: var(--text-primary);
+    color: var(--text-white);
     margin-bottom: 1.5rem;
     line-height: 1.8;
 }
 
 .about-text p {
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.8);
     margin-bottom: 2rem;
     line-height: 1.8;
 }
@@ -357,7 +394,7 @@ section {
     align-items: center;
     gap: 1rem;
     padding: 1rem;
-    background: var(--bg-secondary);
+    background: var(--bg-dark-secondary);
     border-radius: 8px;
     transition: all 0.3s ease;
 }
@@ -372,8 +409,12 @@ section {
     color: var(--primary-color);
 }
 
+.highlight-item span {
+    color: var(--text-white);
+}
+
 .education {
-    background: var(--bg-secondary);
+    background: var(--bg-dark-secondary);
     padding: 2rem;
     border-radius: 12px;
 }
@@ -381,7 +422,7 @@ section {
 .subsection-title {
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
-    color: var(--text-primary);
+    color: var(--text-white);
 }
 
 .education-item {
@@ -401,7 +442,7 @@ section {
 .edu-icon {
     width: 50px;
     height: 50px;
-    background: var(--gradient-primary);
+    background: var(--primary-color);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -413,7 +454,7 @@ section {
 .edu-content h4 {
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
-    color: var(--text-primary);
+    color: var(--text-white);
 }
 
 .edu-institution {
@@ -423,13 +464,14 @@ section {
 }
 
 .edu-date {
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.7);
     font-size: 0.9rem;
 }
 
 /* Experience Section */
 .experience {
-    background: var(--bg-secondary);
+    background: var(--bg-dark);
+    color: var(--text-white);
 }
 
 .timeline {
@@ -444,7 +486,7 @@ section {
     top: 0;
     bottom: 0;
     width: 2px;
-    background: var(--gradient-primary);
+    background: var(--primary-color);
 }
 
 .timeline-item {
@@ -461,12 +503,12 @@ section {
     height: 16px;
     background: var(--primary-color);
     border-radius: 50%;
-    border: 3px solid white;
+    border: 3px solid var(--bg-dark);
     box-shadow: var(--shadow-md);
 }
 
 .timeline-content {
-    background: white;
+    background: var(--bg-dark-secondary);
     padding: 2rem;
     border-radius: 12px;
     box-shadow: var(--shadow-md);
@@ -489,7 +531,7 @@ section {
 
 .timeline-header h3 {
     font-size: 1.3rem;
-    color: var(--text-primary);
+    color: var(--text-white);
 }
 
 .timeline-date {
@@ -499,7 +541,7 @@ section {
 }
 
 .company {
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.7);
     font-weight: 500;
     margin-bottom: 1rem;
 }
@@ -513,7 +555,7 @@ section {
     padding: 0.5rem 0;
     padding-left: 1.5rem;
     position: relative;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.8);
     line-height: 1.6;
 }
 
@@ -549,12 +591,13 @@ section {
     transform: translateY(-5px);
     box-shadow: var(--shadow-xl);
     border-color: var(--primary-color);
+    border-width: 2px;
 }
 
 .project-icon {
     width: 60px;
     height: 60px;
-    background: var(--gradient-primary);
+    background: var(--primary-color);
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -624,6 +667,7 @@ section {
     border-radius: 12px;
     box-shadow: var(--shadow-md);
     transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
 }
 
 .skill-category:hover {
@@ -666,7 +710,7 @@ section {
 }
 
 .skill-tag:hover {
-    background: var(--gradient-primary);
+    background: var(--primary-color);
     color: white;
     transform: translateY(-2px);
     box-shadow: var(--shadow-sm);
@@ -701,9 +745,10 @@ section {
     display: flex;
     gap: 1.5rem;
     padding: 1.5rem;
-    background: var(--bg-secondary);
+    background: white;
     border-radius: 12px;
     transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
 }
 
 .contact-item:hover {
@@ -714,7 +759,7 @@ section {
 .contact-icon {
     width: 50px;
     height: 50px;
-    background: var(--gradient-primary);
+    background: var(--primary-color);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -742,8 +787,9 @@ section {
 .additional-info {
     margin-top: 4rem;
     padding: 2rem;
-    background: var(--bg-secondary);
+    background: white;
     border-radius: 12px;
+    border: 1px solid var(--border-color);
 }
 
 .additional-info h3 {
