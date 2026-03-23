@@ -1562,7 +1562,6 @@ section {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.project-card:hover,
 .skill-category:hover,
 .cert-card:hover {
     transform: translateY(-8px) scale(1.02);
