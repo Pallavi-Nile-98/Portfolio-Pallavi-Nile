@@ -18,7 +18,7 @@ const PORTFOLIO = {
     email: 'npallavi0401@gmail.com',
     linkedin: 'https://www.linkedin.com/in/pallavi-nile',
     github: 'https://github.com/pallavi-nile-98',
-    resume: 'resume.pdf',
+    resume: 'Pallavi_Nile_Resume.pdf',
   },
 
   about: {

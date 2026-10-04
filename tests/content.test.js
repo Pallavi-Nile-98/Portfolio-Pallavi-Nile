@@ -108,6 +108,11 @@ test('contact endpoint is either unset or an https URL', () => {
   }
 });
 
+test('the linked résumé file exists in the repository', () => {
+  const resume = path.join(__dirname, '..', PORTFOLIO.person.resume);
+  assert.ok(fs.existsSync(resume), `${PORTFOLIO.person.resume} is linked but missing`);
+});
+
 test('retired contact details never reappear on the site', () => {
   const retired = ['nilepallavi98@gmail.com', '857-930-8230', '8579308230'];
   const files = ['index.html', '404.html', 'README.md', 'js/content.js'];

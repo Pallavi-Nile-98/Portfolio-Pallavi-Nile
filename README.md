@@ -26,7 +26,7 @@ Portfolio-Pallavi-Nile/
 ├── 404.html                   # Custom error page
 ├── robots.txt / sitemap.xml   # Crawler directives
 ├── site.webmanifest           # PWA manifest
-├── resume.pdf
+├── Pallavi_Nile_Resume.pdf
 └── images/
 ```
 
