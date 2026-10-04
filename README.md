@@ -1,6 +1,6 @@
 # Pallavi Nile — Software Engineer Portfolio
 
-A content-driven personal portfolio built as a real engineering project rather than a single-page template. Every section renders from one typed content module, the case studies are structured around problem/decision/outcome, and the data contract is enforced by an automated test suite in CI.
+A content-driven personal portfolio built as a real engineering project rather than a single-page template. Every section renders from one content module, and the data contract is enforced by an automated test suite in CI.
 
 **Live site:** https://pallavi-nile-98.github.io/Portfolio-Pallavi-Nile/
 
@@ -8,7 +8,7 @@ A content-driven personal portfolio built as a real engineering project rather t
 
 ## Why it is built this way
 
-A portfolio's real maintenance cost is content drift: a job title updated in the hero but not the schema markup, a project renamed in one place and not another. This site removes that class of bug by making `js/content.js` the only place content lives. The DOM, the command palette, the assistant, and the case study dialogs are all derived from it, and `npm test` fails the build if that data breaks its contract.
+A portfolio's real maintenance cost is content drift: a job title updated in the hero but not the schema markup, a project renamed in one place and not another. This site removes that class of bug by making `js/content.js` the only place content lives. The DOM and the command palette are both derived from it, and `npm test` fails the build if that data breaks its contract.
 
 ## Architecture
 
@@ -19,7 +19,7 @@ Portfolio-Pallavi-Nile/
 ├── js/
 │   ├── content.js             # Single source of truth: person, experience, projects, skills, certs
 │   ├── render.js              # Pure content → DOM rendering
-│   └── app.js                 # Behaviour: theme, nav, filters, dialogs, palette, assistant, form
+│   └── app.js                 # Behaviour: theme, nav, palette, contact form
 ├── tests/
 │   └── content.test.js        # Content contract tests (Node built-in test runner, zero deps)
 ├── .github/workflows/ci.yml   # Runs tests and asserts deployment files exist
@@ -42,27 +42,21 @@ No framework and no build step. The site is deployable by copying the directory 
 
 ## Features
 
-**Case studies, not screenshots.** Each project opens a dialog structured as context, problem, objective, role, solution, architecture, technical decisions, features, challenges, testing, security, and results. Fields that do not apply to a project are omitted rather than rendered empty.
+**Project cards.** Each project card shows the problem, what was built with its key numbers, the tech stack, and a link to the public repository. Optional fields such as a problem statement or an in-progress status are omitted rather than rendered empty.
 
-**Honest link handling.** Projects declare a `confidentiality` value of `public`, `private`, or `source-unavailable`. Employer-owned work is labelled as such and never renders a repository link — a rule enforced by a test, not by convention.
-
-**Command palette.** `Ctrl/⌘ + K` opens fuzzy search over sections, case studies, and actions, with full arrow-key and Enter support.
-
-**Portfolio assistant.** A keyword-routed assistant that answers from `content.js`, so its responses cannot drift from the page.
+**Command palette.** `Ctrl/⌘ + K` opens fuzzy search over sections, projects, and actions, with full arrow-key and Enter support.
 
 **Theme switching.** Dark by default, persisted to `localStorage`, degrading safely when storage is unavailable.
-
-**Filterable work section.** Projects filter by category with an accessible tab pattern and an empty state.
 
 **Contact form.** Client-side validation with per-field error messages, `aria-invalid` wiring, a honeypot field, and distinct loading, success, and error states.
 
 ## Accessibility
 
 - Skip link, landmark elements, and a single `h1` per page
-- Focus trapping in the case study dialog and command palette, with focus restored to the trigger on close
-- `aria-live` regions for filtered results, form status, and assistant messages
+- Focus trapping in the command palette, with focus restored to the trigger on close
+- `aria-live` region for form status
 - Visible focus indicators, and "opens in a new tab" announced to screen readers
-- Full keyboard operability across navigation, filters, dialogs, and the palette
+- Full keyboard operability across navigation, the palette, and the contact form
 - `prefers-reduced-motion` disables scroll reveal, background animation, and smooth scrolling
 
 ## Performance
@@ -92,9 +86,9 @@ Open the site through a local server rather than the `file://` protocol so that 
 
 ### Editing content
 
-All content changes go through `js/content.js`. Adding a project means appending one object to the `projects` array; the card, filters, case study dialog, and command palette entry all follow automatically.
+All content changes go through `js/content.js`. Adding a project means appending one object to the `projects` array; the card and command palette entry follow automatically.
 
-Run `npm test` after editing. The suite checks that experience is ordered newest-first, project categories map to declared filters, outbound URLs use HTTPS, identifiers are unique, and non-public projects expose no repository link.
+Run `npm test` after editing. The suite checks that experience is ordered newest-first, every project links a GitHub repository, outbound URLs use HTTPS, identifiers are unique, and retired contact details never reappear.
 
 ### Configuring the contact form
 
@@ -122,8 +116,8 @@ MIT. Feel free to use the structure as a starting point for your own portfolio; 
 
 ## Contact
 
-**Pallavi Nile** — Boston, MA
+**Pallavi Nile**
 
-- Email: nilepallavi98@gmail.com
-- LinkedIn: [linkedin.com/in/pallavi-nile](https://linkedin.com/in/pallavi-nile)
-- GitHub: [github.com/Pallavi-Nile-98](https://github.com/Pallavi-Nile-98)
+- Email: npallavi0401@gmail.com
+- LinkedIn: [linkedin.com/in/pallavi-nile](https://www.linkedin.com/in/pallavi-nile)
+- GitHub: [github.com/pallavi-nile-98](https://github.com/pallavi-nile-98)

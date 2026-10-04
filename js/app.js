@@ -199,69 +199,6 @@
     lastFocused?.focus?.();
   }
 
-  /* ─── Project filters ─── */
-  function initProjectFilters() {
-    const filters = $('#projectFilters');
-    const grid = $('#projectsShowcase');
-    const empty = $('#projectsEmpty');
-    if (!filters || !grid) return;
-
-    filters.addEventListener('click', (e) => {
-      const btn = e.target.closest('.filter-btn');
-      if (!btn) return;
-
-      const filter = btn.dataset.filter;
-
-      $$('.filter-btn', filters).forEach((el) => {
-        const active = el === btn;
-        el.classList.toggle('is-active', active);
-        el.setAttribute('aria-selected', String(active));
-      });
-
-      let visible = 0;
-      $$('.project-showcase-card', grid).forEach((card) => {
-        const categories = (card.dataset.categories || '').split(' ');
-        const show = filter === 'all' || categories.includes(filter);
-        card.hidden = !show;
-        if (!show) return;
-        visible += 1;
-        // A card filtered up from below the fold may never have been revealed.
-        card.classList.add('is-visible');
-      });
-
-      if (empty) empty.hidden = visible > 0;
-    });
-  }
-
-  /* ─── Case study dialog ─── */
-  function openProjectModal(projectId) {
-    const project = PORTFOLIO.projects.find((p) => p.id === projectId);
-    const modal = $('#projectModal');
-    const body = $('#projectModalBody');
-    if (!project || !modal || !body) return;
-
-    body.innerHTML = window.PortfolioRender.caseStudyHtml(project);
-    modal.scrollTop = 0;
-    $('.modal-panel', modal)?.scrollTo?.({ top: 0 });
-    openDialog(modal, $('#projectModalClose'));
-  }
-
-  function initProjectModal() {
-    const modal = $('#projectModal');
-
-    $('#projectsShowcase')?.addEventListener('click', (e) => {
-      const btn = e.target.closest('.project-case-study-btn');
-      if (btn) openProjectModal(btn.dataset.project);
-    });
-
-    $('#projectModalClose')?.addEventListener('click', () => closeDialog(modal));
-    $('#projectModalBackdrop')?.addEventListener('click', () => closeDialog(modal));
-
-    modal?.addEventListener('keydown', (e) => {
-      if (e.key === 'Tab') trapFocus(modal, e);
-    });
-  }
-
   /* ─── Contact form ─── */
   const FIELD_LIMITS = { name: 100, email: 150, subject: 150, message: 2000 };
 
@@ -375,107 +312,6 @@
     });
   }
 
-  /* ─── Portfolio assistant ─── */
-  function assistantReply(input) {
-    const q = input.toLowerCase().trim();
-    const { person, experience, education, certifications, projects, skillGroups } = PORTFOLIO;
-
-    if (/^(hi|hello|hey|greetings)\b/.test(q)) {
-      return 'Hello. Ask me about Pallavi\'s experience, projects, skills, education, certifications, or how to get in touch.';
-    }
-    if (/skill|technolog|stack|tools|expertise/.test(q)) {
-      return skillGroups.map((g) => `${g.title}: ${g.skills.slice(0, 6).join(', ')}`).join('\n');
-    }
-    if (/experience|work|job|role|co-?op|intern|company/.test(q)) {
-      return experience
-        .map((job) => `${job.role} — ${job.company} (${job.dateLabel})`)
-        .join('\n');
-    }
-    if (/geode|blockchain|galactic|deep link|marketplace/.test(q)) {
-      return 'During a six-month co-op at The Geode Foundation, Pallavi built frontend functionality for Galactic Conquest using React and TypeScript, and implemented shareable deep links for Geode Marketplace so a shared URL reopens the same search context.';
-    }
-    if (/education|degree|university|college|gpa|northeastern|study/.test(q)) {
-      return education
-        .map((e) => `${e.degree} — ${e.school} (${e.dateLabel}${e.detail ? `, ${e.detail}` : ''})`)
-        .join('\n');
-    }
-    if (/project|built|portfolio work|case stud/.test(q)) {
-      return projects.map((p, i) => `${i + 1}. ${p.title} — ${p.techSummary}`).join('\n');
-    }
-    if (/cert|aws|credential/.test(q)) {
-      return certifications.map((c) => `${c.name} — ${c.issuer}, ${c.date}`).join('\n');
-    }
-    if (/contact|email|phone|reach|linkedin|hire|available/.test(q)) {
-      return `Email: ${person.email}\nPhone: ${person.phone}\nLocation: ${person.location}\nLinkedIn: ${person.linkedin.replace('https://', '')}\n\n${person.availability}`;
-    }
-    if (/resume|cv/.test(q)) {
-      return 'Her résumé is available from the Résumé link in the navigation, or through the command palette (Ctrl+K).';
-    }
-    if (/cloud|aws|devops|docker|terraform|ci/.test(q)) {
-      return 'Pallavi is an AWS Certified Solutions Architect – Associate. At Sumago Infotech she containerised services with Docker, provisioned AWS infrastructure with Terraform, automated delivery with GitHub Actions, and monitored systems with CloudWatch.';
-    }
-
-    return 'I can answer questions about experience, projects, skills, education, certifications, résumé access, or contact details. Try asking "what projects has she built?"';
-  }
-
-  function addChatMessage(text, isUser = false) {
-    const messages = $('#chatbotMessages');
-    if (!messages) return;
-
-    const wrapper = document.createElement('div');
-    wrapper.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
-
-    const avatar = document.createElement('div');
-    avatar.className = 'message-avatar';
-    avatar.setAttribute('aria-hidden', 'true');
-    avatar.innerHTML = `<i class="fas ${isUser ? 'fa-user' : 'fa-comment-dots'}"></i>`;
-
-    const content = document.createElement('div');
-    content.className = 'message-content';
-    const p = document.createElement('p');
-    p.textContent = text;
-    content.appendChild(p);
-
-    wrapper.append(avatar, content);
-    messages.appendChild(wrapper);
-    messages.scrollTop = messages.scrollHeight;
-  }
-
-  function closeAssistant() {
-    const panel = $('#chatbotContainer');
-    if (!panel?.classList.contains('active')) return;
-    panel.classList.remove('active');
-    $('#chatToggleBtn')?.focus();
-  }
-
-  function initAssistant() {
-    const panel = $('#chatbotContainer');
-    const input = $('#chatbotInput');
-
-    const send = () => {
-      const message = input?.value.trim();
-      if (!message) return;
-      addChatMessage(message, true);
-      input.value = '';
-      window.setTimeout(() => addChatMessage(assistantReply(message)), 350);
-    };
-
-    $('#chatToggleBtn')?.addEventListener('click', () => {
-      panel?.classList.add('active');
-      input?.focus();
-    });
-
-    $('#chatbotClose')?.addEventListener('click', closeAssistant);
-    $('#chatbotSend')?.addEventListener('click', send);
-
-    input?.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        send();
-      }
-    });
-  }
-
   /* ─── Command palette ─── */
   let commands = [];
 
@@ -493,11 +329,14 @@
     }));
 
     const projects = PORTFOLIO.projects.map((p) => ({
-      group: 'Case studies',
+      group: 'Projects',
       label: p.title,
       run: () => {
         closeCommandPalette();
-        window.setTimeout(() => openProjectModal(p.id), 120);
+        $(`#project-${p.id}`)?.scrollIntoView({
+          behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+          block: 'start',
+        });
       },
     }));
 
@@ -639,8 +478,6 @@
 
       if (e.key === 'Escape') {
         closeCommandPalette();
-        closeDialog($('#projectModal'));
-        closeAssistant();
       }
     });
   }
@@ -656,10 +493,7 @@
 
     initTheme();
     initNavigation();
-    initProjectFilters();
-    initProjectModal();
     initContactForm();
-    initAssistant();
     initCommandPalette();
     initReveal();
     initScrollToTop();
