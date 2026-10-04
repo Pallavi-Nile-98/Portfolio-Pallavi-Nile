@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pallavi-nile-98.github.io/Portfolio-Pallavi-Nile/sitemap.xml

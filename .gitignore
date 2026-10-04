@@ -14,6 +14,16 @@ desktop.ini
 *.log
 npm-debug.log*
 
+# Dependencies
+node_modules/
+
+# Secrets and local configuration — never commit these
+.env
+.env.*
+*.env
+config.env
+credentials.json
+
 # Temporary files
 *.tmp
 *.temp
