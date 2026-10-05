@@ -2,8 +2,8 @@
  * Portfolio application behaviour.
  *
  * Sections are rendered by js/render.js from js/content.js; this module owns
- * interaction: theme, navigation, scroll reveal, project filtering, the case
- * study dialog, the command palette, the assistant, and the contact form.
+ * interaction: navigation, scroll reveal, the command palette, and the
+ * contact form.
  */
 (function () {
   'use strict';
@@ -16,40 +16,6 @@
 
   const prefersReducedMotion = () =>
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ─── Theme ─── */
-  const THEME_KEY = 'portfolio-theme';
-
-  function applyTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    try {
-      localStorage.setItem(THEME_KEY, theme);
-    } catch {
-      /* storage unavailable (private mode) — theme still applies for this session */
-    }
-
-    const toggle = $('#themeToggle');
-    if (!toggle) return;
-    toggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
-    toggle.setAttribute('aria-pressed', String(theme === 'dark'));
-    const icon = toggle.querySelector('i');
-    if (icon) icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-  }
-
-  function initTheme() {
-    let stored = null;
-    try {
-      stored = localStorage.getItem(THEME_KEY);
-    } catch {
-      /* ignore */
-    }
-    applyTheme(stored === 'light' || stored === 'dark' ? stored : 'dark');
-
-    $('#themeToggle')?.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme');
-      applyTheme(current === 'dark' ? 'light' : 'dark');
-    });
-  }
 
   /* ─── Navigation ─── */
   function initNavigation() {
@@ -65,10 +31,7 @@
 
     window.addEventListener(
       'scroll',
-      () => {
-        navbar?.classList.toggle('scrolled', window.scrollY > 80);
-        highlightActiveSection();
-      },
+      () => navbar?.classList.toggle('scrolled', window.scrollY > 80),
       { passive: true }
     );
 
@@ -104,20 +67,30 @@
     });
   }
 
-  function highlightActiveSection() {
-    const scrollY = window.scrollY;
-    $$('section[id]').forEach((section) => {
-      const top = section.offsetTop - 120;
-      const bottom = top + section.offsetHeight;
-      if (scrollY >= top && scrollY < bottom) {
-        $$('.nav-link').forEach((link) => {
-          const active = link.getAttribute('href') === `#${section.id}`;
-          link.classList.toggle('active', active);
-          if (active) link.setAttribute('aria-current', 'true');
-          else link.removeAttribute('aria-current');
+  /**
+   * Marks the nav link for the section crossing the middle of the viewport.
+   * IntersectionObserver reports this without reading layout on every scroll.
+   */
+  function initActiveSection() {
+    if (!('IntersectionObserver' in window)) return;
+    const links = $$('.nav-link[href^="#"]');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          links.forEach((link) => {
+            const active = link.getAttribute('href') === `#${entry.target.id}`;
+            link.classList.toggle('active', active);
+            if (active) link.setAttribute('aria-current', 'true');
+            else link.removeAttribute('aria-current');
+          });
         });
-      }
-    });
+      },
+      { rootMargin: '-45% 0px -50% 0px' }
+    );
+
+    $$('section[id]').forEach((section) => observer.observe(section));
   }
 
   /* ─── Scroll reveal ─── */
@@ -373,14 +346,6 @@
           window.location.href = `mailto:${PORTFOLIO.person.email}`;
         },
       },
-      {
-        group: 'Actions',
-        label: 'Toggle theme',
-        run: () => {
-          closeCommandPalette();
-          applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-        },
-      },
     ];
 
     commands = [...nav, ...projects, ...actions];
@@ -491,13 +456,12 @@
 
     window.PortfolioRender.all();
 
-    initTheme();
     initNavigation();
     initContactForm();
     initCommandPalette();
     initReveal();
     initScrollToTop();
-    highlightActiveSection();
+    initActiveSection();
   }
 
   if (document.readyState === 'loading') {

@@ -1,16 +1,16 @@
 {
-    "name": "Pallavi Nile Portfolio",
-    "short_name": "Pallavi Nile",
-    "description": "Software Engineer portfolio — full-stack, AWS, and AI-integrated systems",
-    "icons": [
-        {
-            "src": "images/favicon.svg",
-            "sizes": "any",
-            "type": "image/svg+xml"
-        }
-    ],
-    "theme_color": "#050508",
-    "background_color": "#050508",
-    "display": "standalone",
-    "start_url": "./"
+  "name": "Pallavi Nile Portfolio",
+  "short_name": "Pallavi Nile",
+  "description": "Software Engineer | Full-Stack, Cloud & GenAI",
+  "icons": [
+    {
+      "src": "images/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#faf9f6",
+  "background_color": "#faf9f6",
+  "display": "standalone",
+  "start_url": "./"
 }

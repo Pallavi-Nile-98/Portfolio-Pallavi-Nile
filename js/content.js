@@ -95,7 +95,7 @@ const PORTFOLIO = {
       name: 'AWS Certified Solutions Architect – Associate (SAA-C03)',
       issuer: 'Amazon Web Services',
       date: 'Mar 2026',
-      icon: 'fab fa-aws',
+      icon: 'aws',
       verifyUrl: null,
     },
   ],
@@ -104,25 +104,25 @@ const PORTFOLIO = {
     {
       id: 'languages',
       title: 'Languages',
-      icon: 'fas fa-code',
+      icon: 'code',
       skills: ['Java', 'Python', 'TypeScript', 'JavaScript', 'SQL', 'Bash'],
     },
     {
       id: 'frontend',
       title: 'Frontend',
-      icon: 'fas fa-cube',
+      icon: 'cube',
       skills: ['React.js', 'Redux Toolkit'],
     },
     {
       id: 'backend',
       title: 'Backend and Data',
-      icon: 'fas fa-server',
+      icon: 'server',
       skills: ['Spring Boot', 'Node.js', 'Express.js', 'FastAPI', 'REST APIs', 'PostgreSQL', 'MongoDB', 'OpenSearch'],
     },
     {
       id: 'cloud',
       title: 'Cloud and DevOps',
-      icon: 'fas fa-cloud',
+      icon: 'cloud',
       skills: [
         'AWS (ECS Fargate, EC2, RDS, S3, ALB, VPC, IAM, CloudWatch)',
         'Terraform',
@@ -134,13 +134,13 @@ const PORTFOLIO = {
     {
       id: 'ai',
       title: 'AI',
-      icon: 'fas fa-brain',
+      icon: 'brain',
       skills: ['RAG', 'Embeddings', 'Hybrid Search', 'LLM APIs', 'Playwright automation'],
     },
     {
       id: 'testing',
       title: 'Testing',
-      icon: 'fas fa-vial',
+      icon: 'vial',
       skills: ['JUnit 5', 'Mockito', 'Testcontainers', 'pytest'],
     },
   ],
@@ -153,7 +153,7 @@ const PORTFOLIO = {
     {
       id: 'computer-use-engine',
       title: 'Computer-Use Capability Engine',
-      icon: 'fas fa-robot',
+      icon: 'robot',
       problem:
         'Most AI agents call the model on every step, which makes them slow, costly, and unpredictable.',
       highlights: [
@@ -167,7 +167,7 @@ const PORTFOLIO = {
     {
       id: 'claims-approval-api',
       title: 'Claims Approval API',
-      icon: 'fas fa-file-invoice-dollar',
+      icon: 'file-invoice-dollar',
       highlights: [
         '4-state claims workflow with separation of duties and optimistic locking; 59 automated tests (JUnit 5, Mockito, Testcontainers) in CI in under a minute.',
         '39 AWS resources via Terraform: multi-AZ VPC, ECS Fargate behind an ALB, private RDS, least-privilege IAM, ~$0.07/hour.',
@@ -179,7 +179,7 @@ const PORTFOLIO = {
     {
       id: 'paper-curator',
       title: 'AI Research Paper Curator',
-      icon: 'fas fa-book-open',
+      icon: 'book-open',
       status: 'In progress',
       highlights: [
         'Async arXiv ingestion with OCR fallback and section-aware chunking that keeps citation context.',

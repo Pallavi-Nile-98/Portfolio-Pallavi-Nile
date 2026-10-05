@@ -21,6 +21,11 @@
       .replace(/'/g, '&#39;');
   }
 
+  /** Inline SVG icon drawn from the sprite in index.html. */
+  function icon(name) {
+    return `<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-${esc(name)}"></use></svg>`;
+  }
+
   function badges(items = []) {
     return items.map((item) => `<span class="skill-badge">${esc(item)}</span>`).join('');
   }
@@ -55,7 +60,7 @@
       .map(
         (item) => `
         <div class="education-item">
-          <div class="edu-icon" aria-hidden="true"><i class="fas fa-graduation-cap"></i></div>
+          <div class="edu-icon" aria-hidden="true">${icon('graduation-cap')}</div>
           <div class="edu-content">
             <h4>${esc(item.degree)}</h4>
             <p class="edu-institution">${esc(item.school)}</p>
@@ -99,7 +104,7 @@
         (group) => `
         <div class="skill-category">
           <div class="skill-category-header">
-            <i class="${esc(group.icon)}" aria-hidden="true"></i>
+            ${icon(group.icon)}
             <h3>${esc(group.title)}</h3>
           </div>
           <ul class="skill-tags">
@@ -119,7 +124,7 @@
       .map(
         (cert) => `
         <article class="cert-card">
-          <div class="cert-icon" aria-hidden="true"><i class="${esc(cert.icon)}"></i></div>
+          <div class="cert-icon" aria-hidden="true">${icon(cert.icon)}</div>
           <h3>${esc(cert.name)}</h3>
           <p class="cert-issuer">${esc(cert.issuer)}</p>
           <p class="cert-date">${esc(cert.date)}</p>
@@ -143,10 +148,10 @@
         (p) => `
         <article class="project-showcase-card" id="project-${esc(p.id)}" aria-labelledby="project-${esc(p.id)}-title">
           <div class="project-showcase-header">
-            <div class="project-icon" aria-hidden="true"><i class="${esc(p.icon)}"></i></div>
+            <div class="project-icon" aria-hidden="true">${icon(p.icon)}</div>
             <div class="project-showcase-heading">
               <h3 id="project-${esc(p.id)}-title">${esc(p.title)}</h3>
-              ${p.status ? `<span class="project-status project-status--wip"><i class="fas fa-flask" aria-hidden="true"></i> ${esc(p.status)}</span>` : ''}
+              ${p.status ? `<span class="project-status project-status--wip">${icon('flask')} ${esc(p.status)}</span>` : ''}
             </div>
           </div>
           ${p.problem ? `<p class="project-showcase-summary"><strong>Problem:</strong> ${esc(p.problem)}</p>` : ''}
@@ -154,7 +159,7 @@
           <div class="project-showcase-footer">
             <div class="project-skills">${badges(p.stack)}</div>
             <a class="btn btn-secondary" href="${esc(p.githubUrl)}" target="_blank" rel="noopener noreferrer">
-              <i class="fab fa-github" aria-hidden="true"></i> View on GitHub<span class="visually-hidden">: ${esc(p.title)} (opens in a new tab)</span>
+              ${icon('github')} View on GitHub<span class="visually-hidden">: ${esc(p.title)} (opens in a new tab)</span>
             </a>
           </div>
         </article>`
@@ -169,16 +174,16 @@
     if (!container) return;
 
     const items = [
-      { icon: 'fas fa-envelope', label: 'Email', value: person.email, href: `mailto:${person.email}` },
+      { icon: 'envelope', label: 'Email', value: person.email, href: `mailto:${person.email}` },
       {
-        icon: 'fab fa-linkedin',
+        icon: 'linkedin',
         label: 'LinkedIn',
         value: person.linkedin.replace('https://', ''),
         href: person.linkedin,
         external: true,
       },
       {
-        icon: 'fab fa-github',
+        icon: 'github',
         label: 'GitHub',
         value: person.github.replace('https://', ''),
         href: person.github,
@@ -190,9 +195,9 @@
       .map(
         (item) => `
         <div class="contact-item">
-          <div class="contact-icon" aria-hidden="true"><i class="${esc(item.icon)}"></i></div>
+          <div class="contact-icon" aria-hidden="true">${icon(item.icon)}</div>
           <div class="contact-details">
-            <h4>${esc(item.label)}</h4>
+            <h3>${esc(item.label)}</h3>
             <a href="${esc(item.href)}"${item.external ? ' target="_blank" rel="noopener noreferrer"' : ''}>${esc(item.value)}${item.external ? '<span class="visually-hidden"> (opens in a new tab)</span>' : ''}</a>
           </div>
         </div>`

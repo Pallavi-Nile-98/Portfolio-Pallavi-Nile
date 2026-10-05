@@ -19,7 +19,7 @@ Portfolio-Pallavi-Nile/
 ├── js/
 │   ├── content.js             # Single source of truth: person, experience, projects, skills, certs
 │   ├── render.js              # Pure content → DOM rendering
-│   └── app.js                 # Behaviour: theme, nav, palette, contact form
+│   └── app.js                 # Behaviour: nav, scroll reveal, palette, contact form
 ├── tests/
 │   └── content.test.js        # Content contract tests (Node built-in test runner, zero deps)
 ├── .github/workflows/ci.yml   # Runs tests and asserts deployment files exist
@@ -45,8 +45,6 @@ No framework and no build step. The site is deployable by copying the directory 
 **Project cards.** Each project card shows the problem, what was built with its key numbers, the tech stack, and a link to the public repository. Optional fields such as a problem statement or an in-progress status are omitted rather than rendered empty.
 
 **Command palette.** `Ctrl/⌘ + K` opens fuzzy search over sections, projects, and actions, with full arrow-key and Enter support.
-
-**Theme switching.** Dark by default, persisted to `localStorage`, degrading safely when storage is unavailable.
 
 **Contact form.** Client-side validation with per-field error messages, `aria-invalid` wiring, a honeypot field, and distinct loading, success, and error states.
 
