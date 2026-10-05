@@ -22,7 +22,7 @@ test('person has the contact details the page and schema depend on', () => {
   assert.match(person.linkedin, /^https:\/\//);
   assert.match(person.github, /^https:\/\//);
   assert.ok(person.resume.endsWith('.pdf'));
-  assert.ok(person.headline && person.tagline && person.status);
+  assert.ok(person.headline && person.status && person.summary.length > 0);
 });
 
 test('experience entries are ordered most recent first and fully populated', () => {

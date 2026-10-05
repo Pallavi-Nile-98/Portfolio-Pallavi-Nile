@@ -174,7 +174,9 @@
     if (!container) return;
 
     const items = [
+      { icon: 'location-dot', label: 'Location', value: person.location },
       { icon: 'envelope', label: 'Email', value: person.email, href: `mailto:${person.email}` },
+      { icon: 'phone', label: 'Phone', value: person.phone, href: `tel:${person.phoneHref}` },
       {
         icon: 'linkedin',
         label: 'LinkedIn',
@@ -198,7 +200,11 @@
           <div class="contact-icon" aria-hidden="true">${icon(item.icon)}</div>
           <div class="contact-details">
             <h3>${esc(item.label)}</h3>
-            <a href="${esc(item.href)}"${item.external ? ' target="_blank" rel="noopener noreferrer"' : ''}>${esc(item.value)}${item.external ? '<span class="visually-hidden"> (opens in a new tab)</span>' : ''}</a>
+            ${
+              item.href
+                ? `<a href="${esc(item.href)}"${item.external ? ' target="_blank" rel="noopener noreferrer"' : ''}>${esc(item.value)}${item.external ? '<span class="visually-hidden"> (opens in a new tab)</span>' : ''}</a>`
+                : `<p>${esc(item.value)}</p>`
+            }
           </div>
         </div>`
       )

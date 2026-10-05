@@ -1018,6 +1018,7 @@ section[tabindex='-1']:focus {
     margin-bottom: 0.15rem;
 }
 
+.contact-details p,
 .contact-details a {
     color: var(--text-secondary);
     text-decoration: none;
